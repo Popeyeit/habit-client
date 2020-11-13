@@ -16,6 +16,24 @@ export const TitleWrapper = styled.div`
   @media ${device.laptopL} {
     max-width: 720px;
     margin-bottom: 85px;
+    &::before {
+      content: '';
+      position: absolute;
+      top: -127px;
+      left: 0;
+      width: 353px;
+      height: 351px;
+      background: url(/img/home/noting.svg) no-repeat;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0px;
+      width: 328px;
+      height: 297px;
+      background: url(/img/home/pray_laptop.svg) no-repeat;
+    }
   }
 `;
 

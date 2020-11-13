@@ -5,6 +5,7 @@ const ContainerStyle = styled.div`
   max-width: 600px;
   margin: 0 auto;
   @media ${device.tablet} {
+    position: relative;
     max-width: 658px;
     margin: 0 auto;
     padding: 0;

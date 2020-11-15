@@ -4,9 +4,14 @@ import { device } from '../../helpers/media';
 export const WrapperLogo = styled.div`
   margin: 0 auto;
   margin-bottom: 20px;
-
+  &.mb-form {
+    margin-bottom: 40px;
+  }
   @media ${device.tablet} {
     margin-bottom: 50px;
+    &.mb-form {
+      margin-bottom: 60px;
+    }
   }
 `;
 

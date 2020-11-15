@@ -1,9 +1,15 @@
 import React from 'react';
 import * as styled from './styled';
-const Logo = () => {
+
+interface IProps {
+  mb?: string;
+  img?: string;
+}
+
+const Logo = ({ mb = '20', img = '/img/logo_mob.svg' }: IProps) => {
   return (
-    <styled.WrapperLogo>
-      <styled.Logo src="/img/logo_mob.svg" />
+    <styled.WrapperLogo className={mb}>
+      <styled.Logo src={img} alt="site-logo" />
     </styled.WrapperLogo>
   );
 };

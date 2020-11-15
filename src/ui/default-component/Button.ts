@@ -17,4 +17,27 @@ export const Button = styled.button`
     background-color: #${MAIN_LIGHT_COLOR};
     color: #${BG_GREEN_COLOR};
   }
+  &.bg-green {
+    background-color: #${BG_GREEN_COLOR};
+    border: none;
+    margin-bottom: 40px;
+    &:hover {
+      background-color: transparent;
+      border: 2px solid #${BG_GREEN_COLOR};
+      color: #${BG_GREEN_COLOR};
+    }
+  }
+  &.to-main {
+    background-color: transparent;
+    border: 2px solid #${BG_GREEN_COLOR};
+    color: #${BG_GREEN_COLOR};
+    margin-bottom: 0;
+    :hover {
+      background-color: #${BG_GREEN_COLOR};
+      color: #${MAIN_LIGHT_COLOR};
+      border: none;
+    }
+  }
+  &.google {
+  }
 `;

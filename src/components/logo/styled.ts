@@ -13,12 +13,18 @@ export const WrapperLogo = styled.div`
       margin-bottom: 60px;
     }
   }
+  &.custom-mb {
+    margin-bottom: 0;
+  }
 `;
 
 export const Logo = styled.img`
   margin: 0 auto;
   width: 146px;
-   @media ${device.tablet} {
+  @media ${device.tablet} {
     width: 204px;
-   
+  }
+  &.sm {
+    width: 146px;
+  }
 `;

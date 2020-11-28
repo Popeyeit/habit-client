@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 import loader from './loader/slice';
 import error from './error/slice';
 import user from './user/slice';
+import habits from './habits/slice';
 
 const middleware = getDefaultMiddleware({
   immutableCheck: false,
@@ -33,6 +34,7 @@ export const store = configureStore({
     auth: persistReducer(persistConfig, user),
     loader,
     error,
+    habits,
   },
   middleware,
   devTools: process.env.NODE_ENV !== 'production',

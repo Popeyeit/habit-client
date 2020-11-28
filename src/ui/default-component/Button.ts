@@ -40,4 +40,7 @@ export const Button = styled.button`
   }
   &.google {
   }
+  &.without_mb {
+    margin-bottom: 0;
+  }
 `;

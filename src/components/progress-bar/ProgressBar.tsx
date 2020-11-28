@@ -8,8 +8,6 @@ interface IProps {
 }
 
 const ProgressBar = ({ result, title = 'title' }: IProps) => {
-  console.log(result);
-
   return (
     <styled.BarWrapper>
       <styled.BarText className="title">{title}</styled.BarText>

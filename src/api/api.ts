@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { IObjOfHabit } from '../redux/habits/slice';
 axios.defaults.baseURL = 'https://make-it-habit-server.herokuapp.com/api/';
 
 const Api = {
@@ -18,6 +19,14 @@ const Api = {
   },
   async logoutAxiosUser() {
     const res = await axios.post('users/logout');
+    return res;
+  },
+  async getAxiosHabits() {
+    const res: AxiosResponse = await axios.get('habits');
+    return res;
+  },
+  async createAxiosHabit<T>(body: T) {
+    const res: AxiosResponse<IObjOfHabit> = await axios.post('habits', body);
     return res;
   },
 };

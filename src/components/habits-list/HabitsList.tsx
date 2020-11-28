@@ -1,9 +1,13 @@
 import React, { useRef } from 'react';
 import HabitsItem from '../habits-item/HabitsItem';
-import data from './data';
+import { TInitState } from '../../redux/habits/slice';
 import * as styled from './styled';
 
-const HabitsList = () => {
+interface IProps {
+  habits: TInitState;
+}
+
+const HabitsList = ({ habits }: IProps) => {
   const ok = useRef(null);
   const cancel = useRef(null);
 
@@ -17,11 +21,10 @@ const HabitsList = () => {
   };
   return (
     <styled.List>
-      {data.map((el, idx) => {
+      {habits.map((el, idx) => {
         const res = el.dates.reduce(
           (acc, el) => {
-            const res =
-              el.isDone === 'yes' ? (acc.done += 10) : (acc.notDone += 10);
+            el.isDone === 'true' ? (acc.done += 10) : (acc.notDone += 10);
             return acc;
           },
           { done: 0, notDone: 0 },
@@ -29,7 +32,7 @@ const HabitsList = () => {
 
         return (
           <HabitsItem
-            key={el.title}
+            key={el._id}
             result={res}
             title={el.title}
             onDoneHabit={handleDoneHabit}

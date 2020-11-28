@@ -31,14 +31,14 @@ export const Navigation = styled.nav`
       border-radius: 5px;
     }
     &.calendar::before {
-      background: center no-repeat url(img/nav/calendar.svg) #${BG_GREEN_COLOR};
+      background: center no-repeat url(/img/nav/calendar.svg) #${BG_GREEN_COLOR};
     }
     &.cup::before {
-      background: center no-repeat url(img/nav/cup.svg) #${BG_GREEN_COLOR};
+      background: center no-repeat url(/img/nav/cup.svg) #${BG_GREEN_COLOR};
     }
 
     &.bell::before {
-      background: center no-repeat url(img/nav/bell.svg) #${BG_GREEN_COLOR};
+      background: center no-repeat url(/img/nav/bell.svg) #${BG_GREEN_COLOR};
     }
   }
   .active-icon {

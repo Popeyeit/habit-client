@@ -2,7 +2,7 @@ import React from 'react';
 import * as styled from './styled';
 
 const UserAvatar = ({
-  avatar = 'img/users/user_avatar.svg',
+  avatar = '/img/users/user_avatar.svg',
   name = 'Tommy Belkov',
   subscribe = 'Basic',
 }: IUser) => {

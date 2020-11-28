@@ -6,7 +6,7 @@ import * as styled from './styled';
 
 interface IDate {
   date: number;
-  isDone: 'yes' | 'no' | 'nothing';
+  isDone: 'true' | 'false' | 'null';
 }
 
 const HabitsItem = ({

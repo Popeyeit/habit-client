@@ -35,9 +35,9 @@ const Title = styled.h2`
 const Header = ({ text = 'Чек-лист привычек' }: IProps) => {
   return (
     <HeaderWrapper>
-      <Logo img="img/logo_auth.svg" size="sm" mb="custom-mb" />
+      <Logo img="/img/logo_auth.svg" size="sm" mb="custom-mb" />
       <Title>{text}</Title>
-      <Logo img="img/logo_auth.svg" size="sm" mb="custom-mb" />
+      <Logo img="/img/logo_auth.svg" size="sm" mb="custom-mb" />
     </HeaderWrapper>
   );
 };

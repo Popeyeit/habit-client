@@ -1,20 +1,26 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { IStore } from '../../interfaces/store.type';
 import { Button } from '../../ui/default-component/Button';
 import * as styled from './styled';
-import data from './data';
-import colors from '../../data/colorsHabit';
-const SidebarHabits = () => {
+
+interface IProps {
+  openModal: () => void;
+}
+
+const SidebarHabits = ({ openModal }: IProps) => {
+  const { habits } = useSelector((state: IStore) => state);
   return (
     <styled.HabitsWrapper>
       <styled.HabitTitle>Привычки</styled.HabitTitle>
       <styled.HabitsList>
-        {data.map((el, idx) => (
-          <styled.HabitItem key={el.text} color={colors[idx]}>
-            {el.text}
-          </styled.HabitItem>
+        {habits.map((el, idx) => (
+          <styled.HabitItem key={el._id}>{el.title}</styled.HabitItem>
         ))}
       </styled.HabitsList>
-      <Button className="bg-green">Добавить привычку +</Button>
+      <Button className="bg-green" onClick={openModal}>
+        Добавить привычку +
+      </Button>
     </styled.HabitsWrapper>
   );
 };

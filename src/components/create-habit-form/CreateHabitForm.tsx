@@ -2,15 +2,21 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import moment from 'moment';
+import 'moment/locale/ru';
 import { Button } from '../../ui/default-component/Button';
 import DatePickerHabit from '../date-picker-habit/DatePickerHabit';
 import ValidateSchema from './validate';
 import { createHabitOperation } from '../../redux/habits/operation';
 import * as styled from './styled';
+moment.locale('ru');
 
 const momentFormat = 'dddd.DD.MMMM.YYYY';
 
-const CreateHabitForm = () => {
+interface IProps {
+  closeModal: () => void;
+}
+
+const CreateHabitForm = ({ closeModal }: IProps) => {
   const dispatch = useDispatch();
   return (
     <styled.FormWrapper>
@@ -26,14 +32,14 @@ const CreateHabitForm = () => {
         }}
         validationSchema={ValidateSchema}
         onSubmit={values => {
-          console.log(values);
           const repeats = values.repeats.split(',');
           const startDate = moment(values.startDate, momentFormat).format(
             momentFormat,
           );
           const body = { ...values, startDate, repeats };
+          console.log(body);
 
-          dispatch(createHabitOperation(body));
+          dispatch(createHabitOperation(body, closeModal));
         }}
       >
         {({ errors, touched }) => {
@@ -66,8 +72,8 @@ const CreateHabitForm = () => {
                     Ежедневно
                   </option>
                   <option value="everyTwoDays">Через день</option>
-                  <option value="Monday,Wednesday,Friday">Пн,Ср,Пт</option>
-                  <option value="Tuesdays,Thursdays,Saturdays">Вт,Чт,Сб</option>
+                  <option value="Понедельник,Среда,Пятница">Пн,Ср,Пт</option>
+                  <option value="Вторник,Четверг,Суббота">Вт,Чт,Сб</option>
                 </Field>
                 {errors.repeats && touched.repeats ? (
                   <styled.ErrorMessage>{errors.repeats}</styled.ErrorMessage>

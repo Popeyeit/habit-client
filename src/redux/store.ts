@@ -14,6 +14,7 @@ import loader from './loader/slice';
 import error from './error/slice';
 import user from './user/slice';
 import habits from './habits/slice';
+import currentDate from './current-date/CurrentDate';
 
 const middleware = getDefaultMiddleware({
   immutableCheck: false,
@@ -35,6 +36,7 @@ export const store = configureStore({
     loader,
     error,
     habits,
+    currentDate,
   },
   middleware,
   devTools: process.env.NODE_ENV !== 'production',

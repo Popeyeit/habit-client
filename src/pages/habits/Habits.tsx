@@ -4,21 +4,25 @@ import { store } from '../../redux/store';
 import { getHabitsOperation } from '../../redux/habits/operation';
 import ContentSection from '../../components/contentSection/ContentSection';
 import HabitsList from '../../components/habits-list/HabitsList';
+import Loader from '../../components/loader/Loader';
 import * as styled from './styled';
-import { Store } from '@reduxjs/toolkit';
 
 const state = store.getState();
 type IStore = typeof state;
 
 const Habits = () => {
+  const { currentDate } = useSelector((state: IStore) => state);
   const { habits } = useSelector((state: IStore) => state);
+  const { loader } = useSelector((state: IStore) => state);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getHabitsOperation());
-  }, [dispatch]);
+    dispatch(getHabitsOperation(currentDate));
+  }, [dispatch, currentDate]);
+
   return (
     <ContentSection>
-      <HabitsList habits={habits} />
+      {loader && <Loader />}
+      {!loader && <HabitsList habits={habits} />}
     </ContentSection>
   );
 };

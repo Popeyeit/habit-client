@@ -1,5 +1,5 @@
 export default [
-  { to: '/test', icon: 'calendar' },
-  { to: '/test1', icon: 'cup' },
-  { to: '/test2', icon: 'bell' },
+  { to: '/home', icon: 'calendar' },
+  { to: '/notPage', icon: 'cup' },
+  { to: '/notPage', icon: 'bell' },
 ];

@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { getHabits, createHabit, TInitState, IObjOfHabit } from './slice';
+import { getHabits, createHabit, TInitState, changeHabit } from './slice';
 import { setLoader, unsetLoader } from '../loader/slice';
 import { store } from '../store';
 import Api from '../../api/api';
@@ -12,7 +12,7 @@ interface IGet {
   payload: TInitState | string | undefined;
 }
 
-export const getHabitsOperation = () => async (
+export const getHabitsOperation = (currentDate: string) => async (
   dispatch: Dispatch<IGet>,
   getState: () => IStore,
 ) => {
@@ -26,8 +26,7 @@ export const getHabitsOperation = () => async (
   try {
     dispatch(setLoader());
     Api.setToken(hasToken);
-    const res = await Api.getAxiosHabits();
-    console.log(res.data);
+    const res = await Api.getAxiosHabits<string>(currentDate);
     dispatch(getHabits(res.data));
   } catch (error) {
   } finally {
@@ -43,19 +42,43 @@ interface IBody {
 
 interface ICreate {
   type: string;
-  payload: string | undefined | IObjOfHabit;
+  payload: string | undefined | TInitState;
 }
 
-export const createHabitOperation = (body: IBody) => async (
-  dispatch: Dispatch<ICreate>,
-) => {
+export const createHabitOperation = (
+  body: IBody,
+  closeModal: () => void,
+) => async (dispatch: Dispatch<ICreate>) => {
   try {
     dispatch(setLoader());
     const res = await Api.createAxiosHabit<IBody>(body);
-    console.log(res.data);
+    console.log(res);
     dispatch(createHabit(res.data));
+    closeModal();
   } catch (error) {
   } finally {
     dispatch(unsetLoader());
+  }
+};
+
+export interface IChangeBody {
+  isDone: 'true' | 'false' | 'null';
+  idHabit: string;
+  idDate: string;
+}
+
+interface IChangeD {
+  type: string;
+  payload: undefined | IChangeBody | TInitState;
+}
+
+export const changeHabitOperation = (body: IChangeBody) => async (
+  dispatch: Dispatch<IChangeD>,
+) => {
+  try {
+    dispatch(changeHabit(body));
+    await Api.changeAxiosHabit(body);
+  } catch (error) {
+  } finally {
   }
 };

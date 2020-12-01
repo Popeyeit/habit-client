@@ -12,9 +12,6 @@ import { setLoader, unsetLoader } from '../loader/slice';
 import Api from '../../api/api';
 const state = store.getState();
 type IStore = typeof state;
-interface IError {
-  response: object;
-}
 
 interface IRegister {
   password: string;
@@ -55,9 +52,7 @@ export const registerOperation = (user: IRegister) => async (
     );
 
     dispatch(register(res.data));
-    console.log(res.data);
   } catch (error) {
-    console.dir(error);
     // dispatch(setError(error));
   } finally {
     dispatch(unsetLoader());
@@ -77,7 +72,6 @@ export const loginOperation = (user: ILogin) => async (
     dispatch(login(res.data.user));
     dispatch(setToken(res.data.token));
   } catch (error) {
-    console.dir(error);
     // dispatch(setError(error))
   } finally {
     dispatch(unsetLoader());
@@ -94,7 +88,6 @@ export const getCurrentUserOperation = () => async (
   if (!hasToken) {
     return;
   }
-  console.log(hasToken);
 
   try {
     dispatch(setLoader());
@@ -103,7 +96,6 @@ export const getCurrentUserOperation = () => async (
 
     dispatch(current(res.data));
   } catch (error) {
-    console.dir(error);
     // dispatch(setError(error))
   } finally {
     dispatch(unsetLoader());
@@ -113,13 +105,12 @@ export const getCurrentUserOperation = () => async (
 export const logoutOperation = () => async (dispatch: Dispatch<IAction>) => {
   try {
     dispatch(setLoader());
-    const res = await Api.logoutAxiosUser();
-    console.log(res);
+    await Api.logoutAxiosUser();
+
     Api.unsetToken();
     dispatch(logout());
     dispatch(unsetToken());
   } catch (error) {
-    console.dir(error);
     // dispatch(setError(error))
   } finally {
     dispatch(unsetLoader());

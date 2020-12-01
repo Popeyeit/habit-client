@@ -11,12 +11,9 @@ export const BarWrapper = styled.div`
   font-family: Rubik;
   .title {
     font-weight: 500;
-
     font-size: 1.2vw;
-
     line-height: 1.3vw;
     color: #${TEXT_DARK_COLOR};
-
     margin-bottom: 1rem;
   }
 
@@ -41,9 +38,7 @@ export const BarLineWrapper = styled.div`
 
 export const Bar = styled.div`
   max-width: 26vw;
-
   height: 0.3vw;
-
   margin-bottom: 0.3vw;
   background: linear-gradient(
     to right,

@@ -27,7 +27,7 @@ const Sidebar = () => {
       </styled.NavWrapper>
       <SidebarHabits openModal={openModal} />
       <Modal modalIsOpen={modalIsOpen} closeModal={closeModal}>
-        <CreateHabitForm />
+        <CreateHabitForm closeModal={closeModal} />
       </Modal>
     </styled.Section>
   );

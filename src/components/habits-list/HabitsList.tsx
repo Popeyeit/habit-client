@@ -1,47 +1,51 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { changeHabitOperation } from '../../redux/habits/operation';
 import HabitsItem from '../habits-item/HabitsItem';
 import { TInitState } from '../../redux/habits/slice';
+import { IParams } from '../../interfaces/habits.interface';
 import * as styled from './styled';
+import './Animation.css';
 
 interface IProps {
   habits: TInitState;
 }
 
 const HabitsList = ({ habits }: IProps) => {
-  const ok = useRef(null);
-  const cancel = useRef(null);
+  const dispatch = useDispatch();
 
   const handleDoneHabit = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    params: IParams,
   ) => {
-    const { target } = e;
-    console.log(target);
-    console.log(ok.current);
-    console.log(cancel.current);
+    dispatch(changeHabitOperation(params));
   };
   return (
-    <styled.List>
-      {habits.map((el, idx) => {
-        const res = el.dates.reduce(
-          (acc, el) => {
-            el.isDone === 'true' ? (acc.done += 10) : (acc.notDone += 10);
-            return acc;
-          },
-          { done: 0, notDone: 0 },
-        );
-
-        return (
-          <HabitsItem
-            key={el._id}
-            result={res}
-            title={el.title}
-            onDoneHabit={handleDoneHabit}
-            okRef={ok}
-            cancelRef={cancel}
-          />
-        );
-      })}
-    </styled.List>
+    <styled.ListWrapper>
+      <TransitionGroup component="ul" className="list">
+        {habits.map((el, idx) => {
+          return (
+            <CSSTransition
+              key={el._id}
+              timeout={300}
+              classNames="fade"
+              mountOnEnter
+              appear={true}
+            >
+              <HabitsItem
+                result={el.totalHabitDone}
+                title={el.title}
+                onDoneHabit={handleDoneHabit}
+                idHabit={el._id}
+                idDate={el.date[0]._id}
+                isDone={el.date[0].isDone}
+              />
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
+    </styled.ListWrapper>
   );
 };
 

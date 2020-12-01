@@ -4,22 +4,23 @@ import HabitBtn from '../habit-btn/HabisBtn';
 import { IProps } from '../../interfaces/habits.interface';
 import * as styled from './styled';
 
-interface IDate {
-  date: number;
-  isDone: 'true' | 'false' | 'null';
-}
-
 const HabitsItem = ({
   result,
   title,
   onDoneHabit,
-  okRef,
-  cancelRef,
+  idHabit,
+  idDate,
+  isDone,
 }: IProps) => {
   return (
     <styled.Item>
       <ProgressBar result={result} title={title} />
-      <HabitBtn onDoneHabit={onDoneHabit} okRef={okRef} cancelRef={cancelRef} />
+      <HabitBtn
+        idHabit={idHabit}
+        idDate={idDate}
+        onDoneHabit={onDoneHabit}
+        isDone={isDone}
+      />
       <styled.Settings className="settings" />
     </styled.Item>
   );

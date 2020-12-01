@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { IObjOfHabit } from '../redux/habits/slice';
+import { TInitState } from '../redux/habits/slice';
+import { IChangeBody } from '../redux/habits/operation';
+
 axios.defaults.baseURL = 'https://make-it-habit-server.herokuapp.com/api/';
 
 const Api = {
@@ -21,12 +23,22 @@ const Api = {
     const res = await axios.post('users/logout');
     return res;
   },
-  async getAxiosHabits() {
-    const res: AxiosResponse = await axios.get('habits');
+  async getAxiosHabits<T>(currentDate: T) {
+    const res: AxiosResponse<TInitState> = await axios.get(
+      `habits?currentDate=${currentDate}`,
+    );
     return res;
   },
   async createAxiosHabit<T>(body: T) {
-    const res: AxiosResponse<IObjOfHabit> = await axios.post('habits', body);
+    const res: AxiosResponse<TInitState> = await axios.post('habits', body);
+    return res;
+  },
+
+  async changeAxiosHabit(body: IChangeBody) {
+    const res: AxiosResponse<TInitState> = await axios.patch(
+      `habits/${body.idHabit}/${body.idDate}`,
+      { status: body.isDone },
+    );
     return res;
   },
 };

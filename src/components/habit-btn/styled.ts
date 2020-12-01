@@ -4,6 +4,7 @@ import {
   BORDER_GRAY_COLOR,
   MAIN_LIGHT_COLOR,
   TEXT_DARK_COLOR,
+  VALIDATE_RED_COLOR,
 } from '../../ui/colors';
 export const BtnWrapper = styled.div`
   display: flex;
@@ -26,8 +27,25 @@ export const Button = styled.button`
     margin: auto;
     pointer-events: none;
   }
-  .true {
+  &.true {
+    background: #${BG_GREEN_COLOR};
   }
+  .true {
+    stroke: #${MAIN_LIGHT_COLOR};
+  }
+
   .false {
+    stroke: #${VALIDATE_RED_COLOR};
+  }
+
+  &.false {
+    border: 1px solid #${VALIDATE_RED_COLOR};
+  }
+
+  .not_active {
+    border: 1px; solid #${BORDER_GRAY_COLOR};
+  }
+  & .not_active {
+    stroke: #${BORDER_GRAY_COLOR};
   }
 `;

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { useFormikContext } from 'formik';
-
 import 'react-datepicker/dist/react-datepicker.css';
 import ru from 'date-fns/locale/ru';
 import * as styled from './styled';
@@ -46,7 +45,7 @@ const DatePickerHabit = () => {
         name="startDate"
       />
       <svg width="20" height="20" className="calendar" ref={calendarRef}>
-        <use href="img/calendar.svg#icon-calendar"></use>
+        <use href="/img/calendar.svg#icon-calendar"></use>
       </svg>
     </styled.DatePickerWrapper>
   );

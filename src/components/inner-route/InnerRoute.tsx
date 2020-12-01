@@ -7,7 +7,7 @@ const InnerRoute = () => {
 
   return (
     <Switch>
-      <Route path={`${match.path}/collections`}>
+      <Route path={`${match.path}`}>
         <Habits />
       </Route>
     </Switch>

@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ContentWrapper from './components/content-wrapper/ContentWrapper';
 import Home from './pages/home/Home';
 import Sidebar from './components/sidebar/Sidebar';
-import Habits from './pages/habits/Habits';
-import './App.css';
 import { getCurrentUserOperation } from './redux/user/operation';
 import Header from './components/header/Header';
-import CreateHabitForm from './components/create-habit-form/CreateHabitForm';
 import InnerRoute from './components/inner-route/InnerRoute';
+import DateSidebar from './components/date-sidebar/DateSidebar';
+import { IStore } from './interfaces/store.type';
+import './App.css';
 
-const isAuth = () => {
-  return true;
+const redirectToHome = () => {
+  return <Redirect to="/home" />;
 };
 
 function App() {
+  const { token } = useSelector((state: IStore) => state.auth);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCurrentUserOperation());
@@ -23,20 +25,22 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path="/habit">
-          <Header text="Чек-лист привычек" />
-          <ContentWrapper>
-            <Sidebar />
-            <InnerRoute />
-            <Sidebar />
-          </ContentWrapper>
-        </Route>
+        {token ? (
+          <Route path="/home">
+            <Header text="Чек-лист привычек" />
+            <ContentWrapper>
+              <Sidebar />
+              <InnerRoute />
+              <DateSidebar />
+            </ContentWrapper>
+          </Route>
+        ) : (
+          <Route path="/home">
+            <Home />
+          </Route>
+        )}
       </Switch>
-
-      {/* {<CreateHabitForm />} */}
+      {redirectToHome()}
     </div>
   );
 }

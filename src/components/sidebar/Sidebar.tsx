@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import Modal from '../modal/Modal';
+import { useSelector } from 'react-redux';
+import { IStore } from '../../interfaces/store.type';
 import UserAvatar from '../user-avatar/UserAvatar';
 import Navigation from '../navigation/Navigation';
 import SidebarHabits from '../sidebar-habits/SidebarHabits';
 import CreateHabitForm from '../create-habit-form/CreateHabitForm';
 import * as styled from './styled';
+
 const Sidebar = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { user } = useSelector((state: IStore) => state.auth);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -19,7 +23,7 @@ const Sidebar = () => {
     <styled.Section>
       <UserAvatar
         avatar="/img/users/user_avatar.svg"
-        name="Tommy Belkov"
+        name={user.nickName}
         subscribe="Standard"
       />
       <styled.NavWrapper>

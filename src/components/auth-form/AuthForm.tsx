@@ -22,12 +22,15 @@ const AuthForm = ({ onCloseAuth, type }: IProps) => {
       onSubmit={values => {
         // same shape as initial values
         type === 'Регистрация'
-          ? dispatch(registerOperation(values))
+          ? dispatch(registerOperation(values, onCloseAuth))
           : dispatch(
-              loginOperation({
-                email: values.email,
-                password: values.password,
-              }),
+              loginOperation(
+                {
+                  email: values.email,
+                  password: values.password,
+                },
+                onCloseAuth,
+              ),
             );
       }}
     >

@@ -3,7 +3,7 @@ import * as styled from './styled';
 
 const UserAvatar = ({
   avatar = '/img/users/user_avatar.svg',
-  name = 'Tommy Belkov',
+  name,
   subscribe = 'Basic',
 }: IUser) => {
   return (

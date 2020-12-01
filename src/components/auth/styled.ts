@@ -20,6 +20,7 @@ export const Section = styled.section`
 `;
 
 export const FormWrapper = styled.div`
+  position: relative;
   padding: 0 20px;
   max-width: 320px;
   margin: 0 auto;
@@ -50,5 +51,14 @@ export const FormWrapper = styled.div`
     padding: 8px 20px;
     @media${device.tablet} {
     }
+  }
+  .confirm {
+    position: absolute;
+    top: 100px;
+    font-size: 16px;
+    line-height: 19px;
+    color: #${TEXT_DARK_COLOR};
+    font-family: Rubik;
+    text-align: center;
   }
 `;

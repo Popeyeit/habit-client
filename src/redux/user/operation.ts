@@ -40,9 +40,12 @@ interface IAction {
   payload: IResponseReg | string | undefined | IResponseLog;
 }
 
-export const registerOperation = (user: IRegister) => async (
-  dispatch: Dispatch<IAction>,
-) => {
+type ITypeLogOut = (dispatch: Dispatch<IAction>) => void;
+
+export const registerOperation = (
+  user: IRegister,
+  onCloseAuth: () => void,
+) => async (dispatch: Dispatch<IAction>) => {
   try {
     dispatch(setLoader());
 
@@ -52,6 +55,9 @@ export const registerOperation = (user: IRegister) => async (
     );
 
     dispatch(register(res.data));
+    setTimeout(() => {
+      onCloseAuth();
+    }, 1000);
   } catch (error) {
     // dispatch(setError(error));
   } finally {
@@ -59,7 +65,7 @@ export const registerOperation = (user: IRegister) => async (
   }
 };
 
-export const loginOperation = (user: ILogin) => async (
+export const loginOperation = (user: ILogin, onCloseAuth: () => void) => async (
   dispatch: Dispatch<IAction>,
 ) => {
   try {
@@ -71,6 +77,9 @@ export const loginOperation = (user: ILogin) => async (
     Api.setToken(res.data.token);
     dispatch(login(res.data.user));
     dispatch(setToken(res.data.token));
+    setTimeout(() => {
+      onCloseAuth();
+    }, 1000);
   } catch (error) {
     // dispatch(setError(error))
   } finally {
@@ -96,6 +105,11 @@ export const getCurrentUserOperation = () => async (
 
     dispatch(current(res.data));
   } catch (error) {
+    if (error.response.status === 401) {
+      Api.unsetToken();
+      dispatch(logout());
+      dispatch(unsetToken());
+    }
     // dispatch(setError(error))
   } finally {
     dispatch(unsetLoader());
